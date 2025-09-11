@@ -2,6 +2,10 @@ use clap::{Parser, Subcommand};
 
 #[derive(Subcommand, Debug)]
 pub enum BlurType {
+    Grainy {
+        #[arg(short, long, help = "偏移的最大值")]
+        offset: u32,
+    },
     Bokeh {
         #[arg(short, long, help = "模糊采样的半径长度")]
         radius: f32,

@@ -6,7 +6,7 @@ use crate::{
     args::BlurArgs,
     blur::{
         bokeh_blur::bokeh_blur, box_blur::box_blur_integral, gaussian_blur::gaussian_blur,
-        kawase_blur::kawase_blur,
+        grainy_blur::grainy_blur, kawase_blur::kawase_blur,
     },
     models::image::Image,
 };
@@ -47,6 +47,7 @@ impl App {
                 crate::args::BlurType::Bokeh { radius, iter_count } => {
                     bokeh_blur(&output_image, radius, iter_count.into())
                 }
+                crate::args::BlurType::Grainy { offset } => grainy_blur(&output_image, offset),
             };
         }
         output_image.scale(original_width as usize, original_height as usize);
