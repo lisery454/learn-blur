@@ -2,7 +2,7 @@ use image::{Rgb, RgbImage};
 
 use crate::models::color::Color;
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Image {
     pub width: u32,
     pub height: u32,
@@ -16,6 +16,12 @@ impl Image {
             height: height,
             pixels: pixels,
         }
+    }
+
+    pub fn get_pixel(&self, x: u32, y: u32) -> Color {
+        let x = x as usize;
+        let y = y as usize;
+        return self.pixels[y][x];
     }
 
     pub fn write_to(&self, path: &String) {

@@ -4,7 +4,10 @@ use clap::Parser;
 
 use crate::{
     args::BlurArgs,
-    blur::{box_blur::box_blur_integral, gaussian_blur::gaussian_blur},
+    blur::{
+        bokeh_blur::bokeh_blur, box_blur::box_blur_integral, gaussian_blur::gaussian_blur,
+        kawase_blur::kawase_blur,
+    },
     models::image::Image,
 };
 
@@ -38,6 +41,12 @@ impl App {
                     gaussian_blur(&output_image, radius, sigma)
                 }
                 crate::args::BlurType::Box { size } => box_blur_integral(&output_image, size),
+                crate::args::BlurType::Kawase { kawase_count } => {
+                    kawase_blur(&output_image, kawase_count)
+                }
+                crate::args::BlurType::Bokeh { radius, iter_count } => {
+                    bokeh_blur(&output_image, radius, iter_count.into())
+                }
             };
         }
         output_image.scale(original_width as usize, original_height as usize);

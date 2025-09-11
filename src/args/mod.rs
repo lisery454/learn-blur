@@ -2,6 +2,16 @@ use clap::{Parser, Subcommand};
 
 #[derive(Subcommand, Debug)]
 pub enum BlurType {
+    Bokeh {
+        #[arg(short, long, help = "模糊采样的半径长度")]
+        radius: f32,
+        #[arg(short, long, help = "需要的迭代次数")]
+        iter_count: u8,
+    },
+    Kawase {
+        #[arg(short, long, help = "执行一次kawase需要的迭代次数")]
+        kawase_count: u32,
+    },
     Gaussian {
         #[arg(short, long, help = "模糊采样的半径长度", value_parser = validate_radius)]
         radius: u8,
