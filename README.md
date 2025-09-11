@@ -1,6 +1,6 @@
 # learn blur
 
-a console project for learning blur methods.
+a console project for learning blur methods. (no gpu, so it's slow, only for learning)
 
 just run `cargo run -- --help` to use it;
 
